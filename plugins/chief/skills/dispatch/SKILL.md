@@ -108,5 +108,6 @@ A done researcher or brainstormer with a report can be followed by a successor: 
 - Don't delete a remote branch unless the operator explicitly names it; teardown and `--abandon` delete only the LOCAL branch and worktree.
 - Before tearing down or abandoning a builder whose branch is on the remote (`git ls-remote --heads origin <branch>`), look up open/active PRs with that source branch on the hosting platform (`gh`, `az repos`, or the REST API; don't assume GitHub); merged or abandoned PRs don't count. With an open PR, tell the operator, state that the local worktree/branch is what gets discarded, and tear down only on a yes. With none, proceed.
 - `--delete-remote` (the only way teardown runs `git push origin --delete`) needs the operator's explicit instruction; if the branch has an open PR, say first that deleting it breaks the PR's source branch.
+- Merging a PR on the operator's go-ahead (`chief-pr-merge.sh`) deleting its remote source branch is expected; the rule forbids deleting a remote branch via teardown or abandon (e.g. opening a PR, then tearing down before it merges).
 - Don't spawn a worker to answer something a quick read-only look settles. Any actual change to a project, however small, goes to a worker.
 - Don't invent scope in `--spec` beyond what `--intent` asks for.
